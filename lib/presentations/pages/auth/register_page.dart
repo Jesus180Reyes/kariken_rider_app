@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rider_app/presentations/services/auth/auth_provider.dart';
 import '../../shared/shared.dart';
 import '../../widgets/widgets.dart';
 
@@ -42,6 +44,7 @@ class _RegisterForm extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final authFormProvider = Provider.of<AuthProvider>(context);
     return Column(
       children: [
         const SvgWidget(svgPath: 'assets/svgs/auth/register.svg'),
@@ -68,9 +71,17 @@ class _RegisterForm extends StatelessWidget {
           child: const Text("Ya tienes una cuenta? Inicia Sesion"),
         ),
         AuthButtonWidget(
-          title: 'Registrarse',
-          onTap: () => Navigator.pushReplacementNamed(context, "home"),
-        ),
+            title: 'Registrarse',
+            onTap: () {
+              FocusScope.of(context).unfocus();
+              authFormProvider.addUserDataForm(
+                name: nameController.value.text.trim(),
+                lastName: lastNameController.value.text.trim(),
+                email: emailController.value.text.trim(),
+                password: passwordController.value.text.trim(),
+              );
+              Navigator.pushReplacementNamed(context, "phone-verify");
+            }),
       ],
     );
   }

@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:rider_app/config/app_theme.dart';
-import 'package:rider_app/presentations/pages/pages.dart';
+import 'package:provider/provider.dart';
+import 'package:rider_app/config/routes/router.dart';
+import 'package:rider_app/config/theme/app_theme.dart';
+import 'package:rider_app/presentations/services/auth/auth_provider.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => AuthProvider(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,13 +25,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Rider App',
       debugShowCheckedModeBanner: false,
-      initialRoute: "login",
+      initialRoute: Routes.initialRoute,
       theme: AppTheme().theme(),
-      routes: {
-        "home": (_) => const HomePage(),
-        "register": (_) => const RegisterPage(),
-        "login": (_) => const LoginPage(),
-      },
+      routes: Routes.router,
     );
   }
 }

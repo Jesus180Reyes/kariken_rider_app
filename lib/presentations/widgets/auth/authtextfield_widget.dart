@@ -11,6 +11,7 @@ class AuthTextfield extends StatelessWidget {
     this.isPassword = false,
     this.textInputType = TextInputType.emailAddress,
     this.controller,
+    // required String title,
   });
 
   @override
