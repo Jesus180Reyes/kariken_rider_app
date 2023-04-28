@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jesus180reyes.rider_app">
+    <meta-data android:name="com.google.android.geo.AIzaSyC8mDpZGeykU9RfF7cyCtNLIxkHOnVvzeI"
+        android:value="AIzaSyC8mDpZGeykU9RfF7cyCtNLIxkHOnVvzeI"/>
     <!-- The INTERNET permission is required for development. Specifically,
          the Flutter tool needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.

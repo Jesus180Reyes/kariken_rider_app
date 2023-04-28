@@ -1,3 +1,4 @@
+export 'package:rider_app/presentations/widgets/home/map_google_widget.dart';
 export 'package:rider_app/presentations/widgets/home/trip_history_widget.dart';
 export 'package:rider_app/presentations/widgets/home/suggestionbox_item_widget.dart';
 export 'package:rider_app/presentations/widgets/home/titlerowtitle_widget.dart';

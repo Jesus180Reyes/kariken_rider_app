@@ -11,38 +11,27 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: [
+            children: const [
               //* Header
-              const TitleWidget(),
+              TitleWidget(),
 
               //* Search
-              const SearchDestinyWidget(),
+              SearchDestinyWidget(),
 
               //* Trips History
-              const TripHistoryBox(),
+              TripHistoryBox(),
 
               // * Map Widget
-              // * TODO: Add a Google Map with customer current location
-              Container(
-                margin: const EdgeInsets.all(30),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: const Color(0xffF1F1F1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                height: 200,
-                width: double.infinity,
-                child: const Text("MAP WIDGET"),
-              ),
+              MapGoogleWidget(),
 
               //* Title Suggestions
-              const TitleRowHome(
+              TitleRowHome(
                 title: 'Sugerencias',
                 subtitle: "Ver Todo",
               ),
 
               //* Suggestions Items
-              const SuggestionBox(),
+              SuggestionBox(),
             ],
           ),
         ),
