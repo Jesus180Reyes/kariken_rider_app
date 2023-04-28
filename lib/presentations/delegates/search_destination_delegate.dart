@@ -37,13 +37,13 @@ class SearchDestinationDelegate extends SearchDelegate {
       children: const [
         ListTile(
           leading: CircleAvatar(
-            child: Icon(Icons.location_searching),
+            child: Icon(Icons.location_on_rounded),
           ),
           trailing: Icon(Icons.arrow_forward_ios_rounded),
           title: Text("Agrega tu destino manualmente"),
           subtitle: Text("Podras agregar tu destino manualmente"),
         ),
-        TripHistoryBox(),
+        TripHistoryBox(icon: Icons.history_rounded),
       ],
     );
   }

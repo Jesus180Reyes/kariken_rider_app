@@ -6,7 +6,7 @@ class MapGoogleWidget extends StatelessWidget {
     super.key,
   });
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
+    target: LatLng(13.312160, -87.177323),
     zoom: 14.4746,
   );
   @override

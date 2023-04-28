@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TripHistoryBox extends StatelessWidget {
+  final IconData? icon;
   const TripHistoryBox({
     super.key,
+    this.icon = Icons.location_on_rounded,
   });
 
   @override
@@ -11,26 +13,28 @@ class TripHistoryBox extends StatelessWidget {
       shrinkWrap: true,
       itemCount: 2,
       itemBuilder: (BuildContext context, int index) {
-        return const TripHistoryItem();
+        return TripHistoryItem(icon: icon);
       },
     );
   }
 }
 
 class TripHistoryItem extends StatelessWidget {
+  final IconData? icon;
   const TripHistoryItem({
     super.key,
+    this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
-    return const ListTile(
+    return ListTile(
       leading: CircleAvatar(
-        child: Icon(Icons.location_on),
+        child: Icon(icon),
       ),
-      title: Text("Seguros La Granja IHSS"),
-      subtitle: Text("Instituto Hondureno de Seguridad"),
-      trailing: Icon(Icons.arrow_forward_ios_rounded),
+      title: const Text("Seguros La Granja IHSS"),
+      subtitle: const Text("Instituto Hondureno de Seguridad"),
+      trailing: const Icon(Icons.arrow_forward_ios_rounded),
     );
   }
 }
