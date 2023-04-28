@@ -23,6 +23,9 @@ class MapGoogleWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: const GoogleMap(
+          myLocationButtonEnabled: true,
+          myLocationEnabled: true,
+          compassEnabled: true,
           zoomControlsEnabled: false,
           mapType: MapType.normal,
           initialCameraPosition: _kGooglePlex,

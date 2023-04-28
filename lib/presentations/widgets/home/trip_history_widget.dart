@@ -29,6 +29,7 @@ class TripHistoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => Navigator.pushNamed(context, "map"),
       leading: CircleAvatar(
         child: Icon(icon),
       ),

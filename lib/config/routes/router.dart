@@ -10,5 +10,6 @@ class Routes {
     "register": (_) => const RegisterPage(),
     "login": (_) => const LoginPage(),
     "phone-verify": (_) => const PhoneVerificationPage(),
+    "map": (_) => const MapPage(),
   };
 }

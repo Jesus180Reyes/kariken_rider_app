@@ -34,16 +34,17 @@ class SearchDestinationDelegate extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     if (query.isNotEmpty) return const CircularProgressIndicator.adaptive();
     return Column(
-      children: const [
+      children: [
         ListTile(
-          leading: CircleAvatar(
+          onTap: () => Navigator.pushNamed(context, "map"),
+          leading: const CircleAvatar(
             child: Icon(Icons.location_on_rounded),
           ),
-          trailing: Icon(Icons.arrow_forward_ios_rounded),
-          title: Text("Agrega tu destino manualmente"),
-          subtitle: Text("Podras agregar tu destino manualmente"),
+          trailing: const Icon(Icons.arrow_forward_ios_rounded),
+          title: const Text("Agrega tu destino manualmente"),
+          subtitle: const Text("Podras agregar tu destino manualmente"),
         ),
-        TripHistoryBox(icon: Icons.history_rounded),
+        const TripHistoryBox(icon: Icons.history_rounded),
       ],
     );
   }
