@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rider_app/domain/entities/models/suggestions.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -20,21 +19,7 @@ class HomePage extends StatelessWidget {
               const SearchDestinyWidget(),
 
               //* Trips History
-              // TODO: Fix this to a readable widget
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: 2,
-                itemBuilder: (BuildContext context, int index) {
-                  return const ListTile(
-                    leading: CircleAvatar(
-                      child: Icon(Icons.location_on),
-                    ),
-                    title: Text("Seguros La Granja IHSS"),
-                    subtitle: Text("Instituto Hondureno de Seguridad"),
-                    trailing: Icon(Icons.arrow_forward_ios_rounded),
-                  );
-                },
-              ),
+              const TripHistoryBox(),
 
               // * Map Widget
               // * TODO: Add a Google Map with customer current location
@@ -57,21 +42,7 @@ class HomePage extends StatelessWidget {
               ),
 
               //* Suggestions Items
-              // TODO: Fix this to a readable widget
-              Container(
-                margin: const EdgeInsets.only(left: 10, right: 10),
-                height: 100,
-                child: ListView.builder(
-                  itemCount: suggestionsData.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SuggestionBoxItem(
-                      index: index,
-                      suggestions: suggestionsData[index],
-                    );
-                  },
-                ),
-              ),
+              const SuggestionBox(),
             ],
           ),
         ),

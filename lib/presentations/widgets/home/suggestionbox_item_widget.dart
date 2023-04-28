@@ -1,6 +1,30 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/models/suggestions.dart';
+import '../../../infrastructure/models/suggestions.dart';
+
+class SuggestionBox extends StatelessWidget {
+  const SuggestionBox({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(left: 10, right: 10),
+      height: 100,
+      child: ListView.builder(
+        itemCount: suggestionsData.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (BuildContext context, int index) {
+          return SuggestionBoxItem(
+            index: index,
+            suggestions: suggestionsData[index],
+          );
+        },
+      ),
+    );
+  }
+}
 
 class SuggestionBoxItem extends StatelessWidget {
   final Suggestions suggestions;
