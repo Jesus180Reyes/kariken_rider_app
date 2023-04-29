@@ -1,8 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:rider_app/config/data/map_style.dart';
+import 'package:rider_app/presentations/services/home/home_provider.dart';
 
 class MapGoogleWidget extends StatelessWidget {
   final double? height;
@@ -12,12 +13,10 @@ class MapGoogleWidget extends StatelessWidget {
     this.height = 200,
     this.margin = 30,
   });
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(13.312160, -87.177323),
-    zoom: 14.4746,
-  );
   @override
   Widget build(BuildContext context) {
+    final currentPosition = Provider.of<HomeProvider>(context);
+    if (currentPosition.isLoading) return const CircularProgressIndicator();
     return Container(
       margin: EdgeInsets.all(margin!),
       alignment: Alignment.center,
@@ -38,7 +37,10 @@ class MapGoogleWidget extends StatelessWidget {
           compassEnabled: true,
           zoomControlsEnabled: false,
           mapType: MapType.normal,
-          initialCameraPosition: _kGooglePlex,
+          initialCameraPosition: CameraPosition(
+            target: LatLng(currentPosition.lat!, currentPosition.long!),
+            zoom: 14.4746,
+          ),
         ),
       ),
     );
