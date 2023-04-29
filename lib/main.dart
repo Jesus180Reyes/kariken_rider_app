@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rider_app/config/routes/router.dart';
 import 'package:rider_app/config/theme/app_theme.dart';
 import 'package:rider_app/presentations/services/auth/auth_provider.dart';
+import 'package:rider_app/presentations/services/home/home_provider.dart';
 
 void main() {
   runApp(
@@ -10,6 +11,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (_) => AuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => HomeProvider(),
         ),
       ],
       child: const MyApp(),
