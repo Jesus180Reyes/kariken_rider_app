@@ -31,7 +31,7 @@ class TitleWidget extends StatelessWidget {
           margin: const EdgeInsets.only(left: 15),
           alignment: Alignment.centerLeft,
           child: Text(
-            "Latitude ${currentPosition.lat} Longitude ${currentPosition.long}",
+            currentPosition.addressResults["plus_code"]["compound_code"],
             style: const TextStyle(
               fontSize: 16,
             ),

@@ -6,6 +6,7 @@ import 'package:rider_app/presentations/services/auth/auth_provider.dart';
 import 'package:rider_app/presentations/services/home/home_provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [

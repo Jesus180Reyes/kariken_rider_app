@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rider_app/presentations/shared/shared.dart';
 
+import '../../services/home/home_provider.dart';
 import '../../widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,6 +10,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = Provider.of<HomeProvider>(context).isLoading;
+    if (isLoading) return const LoadingPage();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
