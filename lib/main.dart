@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:rider_app/config/routes/router.dart';
 import 'package:rider_app/config/theme/app_theme.dart';
 import 'package:rider_app/presentations/services/auth/auth_provider.dart';
 import 'package:rider_app/presentations/services/home/home_provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   runApp(
     MultiProvider(
       providers: [
