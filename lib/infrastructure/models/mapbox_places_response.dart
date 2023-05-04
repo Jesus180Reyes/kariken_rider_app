@@ -48,7 +48,7 @@ class Feature {
   final String id;
   final String type;
   final List<String> placeType;
-  final int relevance;
+  final dynamic relevance;
   final Properties properties;
   final String textEs;
   final String placeNameEs;
