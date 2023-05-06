@@ -40,16 +40,22 @@ class HomeProvider extends ChangeNotifier {
     return myPosition;
   }
 
-  Future getPlaceNameByLatLng(
+  Future<void> getPlaceNameByLatLng(
       {required double? latitude, required double? longitude}) async {
-    final apiKey = dotenv.env["API_KEY"];
-    final url = Uri.parse(
-        "https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey");
-    isLoading = true;
-    notifyListeners();
-    final resp = await http.get(url);
-    addressResults = json.decode(resp.body);
-    isLoading = false;
-    notifyListeners();
+    try {
+      final apiKey = dotenv.env["API_KEY"];
+      final url = Uri.parse(
+          "https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey");
+      isLoading = true;
+      notifyListeners();
+      final resp = await http.get(url);
+      addressResults = json.decode(resp.body);
+      isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      isLoading = false;
+      notifyListeners();
+      return Future.error(e.toString());
+    }
   }
 }

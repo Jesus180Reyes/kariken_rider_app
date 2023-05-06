@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rider_app/presentations/shared/shared.dart';
 
-import '../../services/home/home_provider.dart';
+import '../../services/services.dart';
 import '../../widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
