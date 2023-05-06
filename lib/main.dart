@@ -3,9 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:rider_app/config/routes/router.dart';
 import 'package:rider_app/config/theme/app_theme.dart';
-import 'package:rider_app/presentations/services/auth/auth_provider.dart';
-import 'package:rider_app/presentations/services/home/home_provider.dart';
-import 'package:rider_app/presentations/services/search/search_place_provider.dart';
+import 'presentations/services/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +19,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => SearchPlacesProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MapProvider(),
         ),
       ],
       child: const MyApp(),

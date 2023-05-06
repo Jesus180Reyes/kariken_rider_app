@@ -7,17 +7,24 @@ class SearchPlacesProvider extends ChangeNotifier {
   bool isLoading = true;
   MapboxPlaceResponse? mapboxPlaceResponse;
 
-  Future<void> getPlacesByQuery(
-      {required String query,
-      required double long,
-      required double lat}) async {
-    final apiKey = dotenv.env["MAPBOX_API_KEY"];
-    final url = Uri.parse(
-        "https://api.mapbox.com/geocoding/v5/mapbox.places/$query.json?country=hn&proximity=$long%2C$lat&language=es&access_token=$apiKey");
-    final resp = await http.get(url);
-    final data = mapboxPlaceResponseFromJson(resp.body);
-    mapboxPlaceResponse = data;
-    isLoading = false;
-    notifyListeners();
+  Future<void> getPlacesByQuery({
+    required String query,
+    required double long,
+    required double lat,
+  }) async {
+    try {
+      final apiKey = dotenv.env["MAPBOX_API_KEY"];
+      final url = Uri.parse(
+          "https://api.mapbox.com/geocoding/v5/mapbox.places/$query.json?country=hn&proximity=$long%2C$lat&language=es&access_token=$apiKey");
+      final resp = await http.get(url);
+      final data = mapboxPlaceResponseFromJson(resp.body);
+      mapboxPlaceResponse = data;
+      isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      isLoading = false;
+      notifyListeners();
+      return Future.error(e.toString());
+    }
   }
 }

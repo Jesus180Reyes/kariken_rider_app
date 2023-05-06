@@ -1,10 +1,10 @@
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:rider_app/presentations/services/home/home_provider.dart';
-import 'package:rider_app/presentations/services/search/search_place_provider.dart';
 import 'package:rider_app/presentations/shared/shared.dart';
 import 'package:rider_app/presentations/widgets/widgets.dart';
+import '../services/services.dart';
 
 class SearchDestinationDelegate extends SearchDelegate {
   @override
@@ -127,10 +127,21 @@ class _PlacesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentPosition = Provider.of<HomeProvider>(context, listen: false);
+    final destination = Provider.of<MapProvider>(context, listen: false);
     return Container(
       margin: const EdgeInsets.all(3),
       child: ListTile(
         onTap: () {
+          destination.getPolylineStarttoEnd(
+            start: LatLng(currentPosition.lat!, currentPosition.long!),
+            end: LatLng(
+              places
+                  .mapboxPlaceResponse!.features[index].geometry.coordinates[1],
+              places
+                  .mapboxPlaceResponse!.features[index].geometry.coordinates[0],
+            ),
+          );
           Navigator.pushNamed(
             context,
             "map",
