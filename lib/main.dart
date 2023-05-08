@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:rider_app/config/routes/router.dart';
 import 'package:rider_app/config/theme/app_theme.dart';
+import 'package:rider_app/presentations/services/home/bottomnavigation_provider.dart';
 import 'presentations/services/services.dart';
 
 void main() async {
@@ -11,6 +12,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (_) => BottomNavigationProvider(),
+        ),
         ChangeNotifierProvider(
           create: (_) => AuthProvider(),
         ),

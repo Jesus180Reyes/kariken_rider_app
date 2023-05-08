@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rider_app/presentations/pages/pages.dart';
+import 'package:rider_app/presentations/pages/profile/trips_history_page.dart';
+import 'package:rider_app/presentations/services/home/bottomnavigation_provider.dart';
 import 'package:rider_app/presentations/shared/shared.dart';
 
 import '../../services/services.dart';
@@ -10,35 +13,48 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const pages = [_HomeWidget(), TripHistoryPage(), ProfilePage()];
     final isLoading = Provider.of<HomeProvider>(context).isLoading;
+    final currentIndex =
+        Provider.of<BottomNavigationProvider>(context).currentIndex;
     if (isLoading) return const LoadingPage();
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: const [
-              //* Header
-              TitleWidget(),
+      bottomNavigationBar: const CustomButtomNavigationBar(),
+      body: pages[currentIndex],
+    );
+  }
+}
 
-              //* Search
-              SearchDestinyWidget(),
+class _HomeWidget extends StatelessWidget {
+  const _HomeWidget();
 
-              //* Trips History
-              TripHistoryBox(),
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: const [
+            //* Header
+            TitleWidget(),
 
-              // * Map Widget
-              MapGoogleWidget(),
+            //* Search
+            SearchDestinyWidget(),
 
-              //* Title Suggestions
-              TitleRowHome(
-                title: 'Sugerencias',
-                subtitle: "Ver Todo",
-              ),
+            //* Trips History
+            TripHistoryBox(),
 
-              //* Suggestions Items
-              SuggestionBox(),
-            ],
-          ),
+            // * Map Widget
+            MapGoogleWidget(),
+
+            //* Title Suggestions
+            TitleRowHome(
+              title: 'Sugerencias',
+              subtitle: "Ver Todo",
+            ),
+
+            //* Suggestions Items
+            SuggestionBox(),
+          ],
         ),
       ),
     );
