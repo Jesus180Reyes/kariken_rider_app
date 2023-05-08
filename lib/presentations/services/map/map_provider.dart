@@ -1,16 +1,18 @@
 import 'dart:convert';
-
 import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../../config/data/map_style.dart';
+
 class MapProvider extends ChangeNotifier {
   bool isLoading = true;
   String tripDuration = "Duracion del viaje";
   String tripDistance = "Distancia del viaje en KM O MI";
   Iterable geometry = [];
+  GoogleMapController? controller;
 
   Future<void> getPolylineStarttoEnd({
     required LatLng start,
@@ -34,5 +36,20 @@ class MapProvider extends ChangeNotifier {
       notifyListeners();
       return Future.error(e.toString());
     }
+  }
+
+  void onMapCreated({
+    required GoogleMapController controller,
+    required LatLng place,
+  }) {
+    controller.setMapStyle(json.encode(mapStyle));
+    controller.animateCamera(
+      CameraUpdate.newLatLngZoom(place, 13.5),
+      // CameraUpdate.newCameraPosition(
+      //   CameraPosition(target: place, zoom: 13.5),
+      // ),
+    );
+    isLoading = false;
+    notifyListeners();
   }
 }

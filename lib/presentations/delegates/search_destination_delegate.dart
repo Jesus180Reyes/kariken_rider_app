@@ -142,7 +142,7 @@ class _PlacesWidget extends StatelessWidget {
                   .mapboxPlaceResponse!.features[index].geometry.coordinates[0],
             ),
           );
-          Navigator.pushNamed(
+          Navigator.pushReplacementNamed(
             context,
             "map",
             arguments: places.mapboxPlaceResponse!.features[index],
