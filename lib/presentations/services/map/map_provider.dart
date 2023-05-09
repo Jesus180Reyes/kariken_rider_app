@@ -13,6 +13,7 @@ class MapProvider extends ChangeNotifier {
   String tripDistance = "Distancia del viaje en KM O MI";
   Iterable geometry = [];
   GoogleMapController? controller;
+  List<Marker> markers = [];
 
   Future<void> getPolylineStarttoEnd({
     required LatLng start,
@@ -51,5 +52,36 @@ class MapProvider extends ChangeNotifier {
     );
     isLoading = false;
     notifyListeners();
+  }
+
+  addMarkers({
+    required LatLng latLngDestiny,
+    required LatLng latLngPickup,
+    required String markerTitle,
+  }) {
+    markers = [
+      Marker(
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        markerId: const MarkerId(
+          "Destination",
+        ),
+        position: latLngDestiny,
+        infoWindow: InfoWindow(title: markerTitle),
+      ),
+      Marker(
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+        markerId: const MarkerId(
+          "PickUp",
+        ),
+        position: latLngPickup,
+        infoWindow: InfoWindow(title: markerTitle),
+      ),
+    ];
+    notifyListeners();
+  }
+
+  clearMarkers() {
+    markers.clear();
+    geometry.toList().clear();
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rider_app/presentations/pages/pages.dart';
 import 'package:rider_app/presentations/pages/profile/trips_history_page.dart';
-import 'package:rider_app/presentations/services/home/bottomnavigation_provider.dart';
 import 'package:rider_app/presentations/shared/shared.dart';
 
 import '../../services/services.dart';

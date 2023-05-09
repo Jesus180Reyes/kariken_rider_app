@@ -37,6 +37,7 @@ class TripHistoryItem extends StatelessWidget {
     final searchPlace = Provider.of<SearchPlacesProvider>(context);
     final currentPosition = Provider.of<HomeProvider>(context, listen: false);
     final destination = Provider.of<MapProvider>(context, listen: false);
+
     return ListTile(
       onTap: () async {
         final navigator = Navigator.of(context);
@@ -45,7 +46,15 @@ class TripHistoryItem extends StatelessWidget {
           destination: destination,
           searchPlace: searchPlace,
         );
-
+        destination.addMarkers(
+            latLngDestiny: LatLng(
+                searchPlace
+                    .mapboxPlaceResponse!.features[0].geometry.coordinates[1],
+                searchPlace
+                    .mapboxPlaceResponse!.features[0].geometry.coordinates[0]),
+            latLngPickup: LatLng(currentPosition.lat!, currentPosition.long!),
+            markerTitle:
+                searchPlace.mapboxPlaceResponse!.features[0].placeNameEs);
         navigator.pushNamed(
           "map",
           arguments: searchPlace.mapboxPlaceResponse!.features[0],

@@ -127,27 +127,10 @@ class _PlacesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentPosition = Provider.of<HomeProvider>(context, listen: false);
-    final destination = Provider.of<MapProvider>(context, listen: false);
     return Container(
       margin: const EdgeInsets.all(3),
       child: ListTile(
-        onTap: () {
-          destination.getPolylineStarttoEnd(
-            start: LatLng(currentPosition.lat!, currentPosition.long!),
-            end: LatLng(
-              places
-                  .mapboxPlaceResponse!.features[index].geometry.coordinates[1],
-              places
-                  .mapboxPlaceResponse!.features[index].geometry.coordinates[0],
-            ),
-          );
-          Navigator.pushReplacementNamed(
-            context,
-            "map",
-            arguments: places.mapboxPlaceResponse!.features[index],
-          );
-        },
+        onTap: () => setDestinationPolylines(context),
         leading: const CircleAvatar(
           child: Icon(
             Icons.location_on_rounded,
@@ -158,6 +141,31 @@ class _PlacesWidget extends StatelessWidget {
         title: Text(places.mapboxPlaceResponse!.features[index].text),
         subtitle: Text(places.mapboxPlaceResponse!.features[index].placeNameEs),
       ),
+    );
+  }
+
+  void setDestinationPolylines(BuildContext context) {
+    final currentPosition = Provider.of<HomeProvider>(context, listen: false);
+    final destination = Provider.of<MapProvider>(context, listen: false);
+    destination.clearMarkers();
+    destination.getPolylineStarttoEnd(
+      start: LatLng(currentPosition.lat!, currentPosition.long!),
+      end: LatLng(
+        places.mapboxPlaceResponse!.features[index].geometry.coordinates[1],
+        places.mapboxPlaceResponse!.features[index].geometry.coordinates[0],
+      ),
+    );
+    destination.addMarkers(
+        latLngDestiny: LatLng(
+          places.mapboxPlaceResponse!.features[0].geometry.coordinates[1],
+          places.mapboxPlaceResponse!.features[0].geometry.coordinates[0],
+        ),
+        latLngPickup: LatLng(currentPosition.lat!, currentPosition.long!),
+        markerTitle: places.mapboxPlaceResponse!.features[0].placeNameEs);
+    Navigator.pushReplacementNamed(
+      context,
+      "map",
+      arguments: places.mapboxPlaceResponse!.features[index],
     );
   }
 }

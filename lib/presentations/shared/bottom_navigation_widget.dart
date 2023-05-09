@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../services/home/bottomnavigation_provider.dart';
+import '../services/services.dart';
 
 class CustomButtomNavigationBar extends StatelessWidget {
   const CustomButtomNavigationBar({
@@ -13,7 +13,7 @@ class CustomButtomNavigationBar extends StatelessWidget {
     final currentIndex = Provider.of<BottomNavigationProvider>(context);
     return BottomNavigationBar(
       currentIndex: currentIndex.currentIndex,
-      onTap: (value) => currentIndex.onIndexChange(value),
+      onTap: (value) async => await currentIndex.onIndexChange(value),
       items: const [
         BottomNavigationBarItem(
           activeIcon: Icon(Icons.home),

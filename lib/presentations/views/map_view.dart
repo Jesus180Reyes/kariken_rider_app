@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rider_app/infrastructure/models/mapbox_places_response.dart';
 import '../services/services.dart';
 
-class MapView extends StatelessWidget {
+class MapView extends StatefulWidget {
   final Feature feature;
   final HomeProvider currentPosition;
   final MapProvider mapProvider;
@@ -16,8 +16,14 @@ class MapView extends StatelessWidget {
   });
 
   @override
+  State<MapView> createState() => _MapViewState();
+}
+
+class _MapViewState extends State<MapView> {
+  @override
   Widget build(BuildContext context) {
     final points = Provider.of<MapProvider>(context).geometry;
+    final marker = Provider.of<MapProvider>(context);
 
     Set<Polyline> polylines = {};
     final myRoute = Polyline(
@@ -29,12 +35,14 @@ class MapView extends StatelessWidget {
       width: 6,
     );
     polylines.add(myRoute);
+
     return GoogleMap(
+      markers: marker.markers.toSet(),
       polylines: polylines,
       onMapCreated: (GoogleMapController controller) {
-        mapProvider.onMapCreated(
-          place: LatLng(
-              feature.geometry.coordinates[1], feature.geometry.coordinates[0]),
+        widget.mapProvider.onMapCreated(
+          place: LatLng(widget.feature.geometry.coordinates[1],
+              widget.feature.geometry.coordinates[0]),
           controller: controller,
         );
       },
@@ -44,7 +52,8 @@ class MapView extends StatelessWidget {
       zoomControlsEnabled: true,
       mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
-        target: LatLng(currentPosition.lat!, currentPosition.long!),
+        target:
+            LatLng(widget.currentPosition.lat!, widget.currentPosition.long!),
         zoom: 14.4746,
       ),
     );
