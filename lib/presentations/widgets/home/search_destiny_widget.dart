@@ -22,8 +22,8 @@ class SearchDestinyWidget extends StatelessWidget {
           color: const Color(0XFFE3E3E3),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Row(
-          children: const [
+        child: const Row(
+          children: [
             Icon(Icons.search_rounded, size: 32),
             SizedBox(width: 10),
             Text(
